@@ -1,4 +1,5 @@
 import type { Config } from 'tailwindcss';
+import { PluginAPI } from 'tailwindcss/types/config';
 
 const config = {
   darkMode: ['class'],
@@ -17,7 +18,35 @@ const config = {
         '2xl': '1400px',
       },
     },
+    screens: {
+      xs: '540px',
+      sm: '640px',
+      md: '768px',
+      lg: '960px',
+      xl: '1024px',
+      xxl: '1440px',
+    },
     extend: {
+      maxWidth: {
+        lg: '1110px',
+      },
+      backgroundImage: {
+        right_gradient: 'linear-gradient(to right, #FFC593 0%, #BC7198 52%, #5A77FF)',
+        bottom_gradient: 'linear-gradient(to bottom, #FFC593 0%, #BC7198 52%, #5A77FF)',
+        stories_overlay: 'linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 66%) 100%)',
+      },
+      flex: {
+        0.6: '0.6',
+        0.7: '0.7',
+      },
+      fill: {},
+      aspectRatio: {
+        '96/125': '96 / 125',
+        '18/25': '18 / 25',
+      },
+      margin: {
+        18: '4.5rem',
+      },
       fontFamily: {
         dm_sans: ['var(--font-dm_sans)', 'sans-serif'],
       },
@@ -80,7 +109,28 @@ const config = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  plugins: [
+    require('tailwindcss-animate'),
+    function ({ addUtilities }: PluginAPI) {
+      addUtilities({
+        '.fill-facebook': {
+          fill: 'url(#facebook)',
+        },
+        '.fill-instagram': {
+          fill: 'url(#instagram)',
+        },
+        '.fill-twitter': {
+          fill: 'url(#twitter)',
+        },
+        '.fill-youtube': {
+          fill: 'url(#youtube)',
+        },
+        '.fill-pinterest': {
+          fill: 'url(#pinterest)',
+        },
+      });
+    },
+  ],
 } satisfies Config;
 
 export default config;
